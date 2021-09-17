@@ -28,9 +28,6 @@ export function RepositoryList() {
         })}
         {/* {repositories.map(repository => (<RepositoryItem repository={repository} />)} */}
         {/* {repositories.map(repository => <RepositoryItem repository={repository}/>)} */}
-
-
-        
       </ul>
     </section>
   );
