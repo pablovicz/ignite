@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --red: #E52E4D;
         --blue: #5429CC;
+        --green: #33cc95;
         --blue-light: #6933ff;
 
         --text-title: #363F5F;
@@ -41,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
     // tudo que usar como medida REM acompannhará a mudança
 
     body {
-        background-color: var(---background);
+        background: var(--background);
         -webkit-font-smoothing: antialiased;
     }
 
