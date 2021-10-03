@@ -17,5 +17,5 @@ export default (request: NextApiRequest, response: NextApiResponse) => {
 }
 
 
-// api hooks -> Serverless
+// api routes -> Serverless
 // 
