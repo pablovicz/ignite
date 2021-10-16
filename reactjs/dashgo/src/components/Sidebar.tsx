@@ -50,7 +50,7 @@ export function Sidebar() {
                         </ChakraLink>
                         <ChakraLink display="flex" align="center">
                             <Icon as={RiGitMergeLine} fontSize="20"/>
-                            <Text ml="4" fontWeight="medium">Atuomação</Text>
+                            <Text ml="4" fontWeight="medium">Automação</Text>
                         </ChakraLink>
                     </Stack>
                 </Box>
