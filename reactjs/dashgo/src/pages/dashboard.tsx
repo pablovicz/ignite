@@ -73,7 +73,7 @@ export default function Dashboard() {
                     align="flex-start"
                 >
                     <Box
-                        p="8"
+                        p={["6", "8"]}
                         bg="gray.800"
                         borderRadius={8}
                         pb="4"
@@ -82,7 +82,7 @@ export default function Dashboard() {
                         <Chart options={options} series={series} type="area" height={160} />
                     </Box>
                     <Box
-                        p="8"
+                        p={["6", "8"]}
                         bg="gray.800"
                         borderRadius={8}
                         pb="4"
