@@ -39,7 +39,8 @@ export function Header() {
                 </IconButton>
             )}
             <Logo />
-            {isWideVersion && (<SearchBox />)}
+            {/* {isWideVersion && (<SearchBox />)} */}
+            <SearchBox />
             <Flex align="center" ml="auto">
                 <NotificationsNav />
                 <Profile showProfileData={isWideVersion}/>
