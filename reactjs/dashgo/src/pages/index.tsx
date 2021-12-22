@@ -1,11 +1,12 @@
 import { Flex, Button, Stack } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { YupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup'
+
 
 import { Input } from '../components/Form/Input';
 
-type signInFormData = {
+type SignInFormData = {
   email: string;
   password: string;
 }
@@ -13,52 +14,55 @@ type signInFormData = {
 const signInFormSchema = yup.object().shape({
   email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
   password: yup.string().required('Senha obrigatória')
-});
+})
 
-export default function Home() {
 
-  const { register, handleSubmit, formState, errors } = useForm({
-    resolver: YupResolver(signInFormSchema)
+export default function SignIn() {
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(signInFormSchema)
   });
 
-  const handleSignin: SubmitHandler<signInFormData> = (values, event) => {
-    event.preventDefault
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values, event) => {
+    event.preventDefault();
+    await new Promise(resolve => setTimeout(resolve, 2000));
     console.log(values);
   }
 
   return (
+
     <Flex
-      w="100vw"
+      width="100vw"
       h="100vh"
-      align="center"
-      justify="center"
+      alignItems="center"
+      justifyContent="center"
     >
       <Flex
         as="form"
         width="100%"
-        maxWidth={360}
+        maxWidth={360}  //em pixels
         bg="gray.800"
-        p="8"  // medida do chakra -> 8 = 2rem = 32px
+        p="8"   // 8 * 4 = 32px  | 8/2 = 2rem
         borderRadius={8}
         flexDirection="column"
-        onSubmit={handleSubmit(handleSignin)}
+        noValidate   // desabilita validacao default do HTML5
+        onSubmit={handleSubmit(handleSignIn)}
       >
         <Stack spacing="4">
           <Input
-            type="email"
-            label="E-mail"
             name="email"
-            error={errors.email}
-            ref={register} 
+            label="E-mail"
+            type="email"
+            error={formState.errors.email}
+            {...register('email')} 
           />
           <Input
-            type="password"
-            label="Senha"
             name="password"
-            error={errors.password}
-            ref={register} 
+            label="Senha"
+            type="password"
+            error={formState.errors.password}
+            {...register('password')} 
           />
-
         </Stack>
         <Button
           type="submit"
@@ -71,5 +75,6 @@ export default function Home() {
         </Button>
       </Flex>
     </Flex>
+
   )
 }
