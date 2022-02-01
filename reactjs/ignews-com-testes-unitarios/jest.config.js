@@ -16,5 +16,13 @@ module.exports ={
     moduleNameMapper: {
         "\\.(scss|css|sass)$": "identity-obj-proxy" //yarn add identity-obj-proxy -D
     },
-    testEnvironment: 'jsdom'
+    testEnvironment: 'jsdom',
+    collectCoverage: true,
+    collectCoverageFrom: [
+        'src/**/*.tsx',
+        '!src/**/*spec.tsx',
+        '!src/**/_app.tsx',
+        '!src/**/_document.tsx',
+    ],
+    coverageReporters: ['lcov', 'json']
 }

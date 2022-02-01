@@ -30,6 +30,9 @@ describe('Header Component', () => {
             <Header />
         )
 
+        // ajuda a mostrar formas de selecionar os elementos do componente
+        screen.logTestingPlaygroundURL();
+
         expect(screen.getByText('Home')).toBeInTheDocument();
         expect(screen.getByText('Posts')).toBeInTheDocument();
     });
