@@ -9,7 +9,6 @@ import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import { Heading } from "../../components/Heading";
 import { Sidebar } from "../../components/Sidebar";
-import { object } from "yup/lib/locale";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
 import { useRouter } from "next/router";

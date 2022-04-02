@@ -56,7 +56,21 @@ export function makeServer() {
 
                 return {totalCount: total, users}
             });
-            this.get('users/:id')
+
+
+            this.get('/users/:id'
+            , function(schema, request) {
+                let { id } = request.params;
+                // console.log(this.serialize(schema.all('user')).users)
+                // let user = this.serialize(schema.all('user')).users.filter((user) => {Number(user.id) === Number(id)});
+                // console.log(user)
+                return {
+                    id,
+                    name: "User Teste",
+                    email: 'user_teste@email.com',
+                    created_at: new Date()
+                };
+            })
 
 
             this.post('/users');

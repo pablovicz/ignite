@@ -14,6 +14,8 @@ type GetUsersResponse = {
 }
 
 
+type GetUserResponse = User;
+
 async function getUsers(page: number): Promise<GetUsersResponse> {
     const { data } = await api.get('/users', {
         params: {
@@ -36,7 +38,25 @@ async function getUsers(page: number): Promise<GetUsersResponse> {
         }
     });
 
-    return {users, totalCount}
+    return { users, totalCount }
+}
+
+
+async function getUser(userId: string): Promise<GetUserResponse> {
+    const { data } = await api.get(`/users/${userId}`);
+    const user = {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        createdAt: new Date(data.created_at).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        })
+    }
+
+
+    return user
 }
 
 
@@ -46,4 +66,12 @@ export function useUsers(page: number) {
         staleTime: 1000 * 60 * 10 // durante 10 minutos a query torna-se obsoleta
     });
 
+}
+
+
+export function useUser(userId: string) {
+    const user = useQuery<GetUserResponse>(['users', userId], () => getUser(userId), {
+        staleTime: 1000 * 60 * 10 // durante 10 minutos a query torna-se obsoleta
+    });
+    return user
 }

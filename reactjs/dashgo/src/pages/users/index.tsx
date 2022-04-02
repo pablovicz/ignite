@@ -4,7 +4,7 @@ import {
     Box, Flex, Button, Icon, Table, Thead, Spinner, HStack, Progress, Stack,
     Tr, Th, Td, Checkbox, Tbody, Text, useBreakpointValue, IconButton
 } from "@chakra-ui/react";
-import { RiAddLine, RiPencilLine, RiRefreshLine } from "react-icons/ri";
+import { RiAddLine, RiPencilLine, RiRefreshLine, RiZoomInLine } from "react-icons/ri";
 import Link from 'next/link';
 
 import { Header } from "../../components/Header";
@@ -14,9 +14,12 @@ import { Sidebar } from "../../components/Sidebar";
 import { useUsers } from "../../services/hooks/useUsers";
 import { queryClient } from '../../services/queryClient';
 import { api } from '../../services/api';
+import { useRouter } from 'next/router';
 
 
 export default function UserList() {
+
+    const router = useRouter();
 
     const [page, setPage] = useState(1);
     const { data, isLoading, isFetching, error, refetch } = useUsers(page);
@@ -34,6 +37,11 @@ export default function UserList() {
         }, {
             staleTime: 1000 * 60 * 10 //10 minutos
         })
+    }
+
+
+    function handleUserDetail(userId: string) {
+        router.push(`/users/edit/${userId}`)
     }
 
 
@@ -108,12 +116,12 @@ export default function UserList() {
                                             </Td>
                                             <Td>
                                                 <Box>
-                                                    <ChakraLink 
+                                                    {/* <ChakraLink 
                                                         color="purple.400"
                                                         onMouseEnter={() => handlePrefetchUser(user.id)}
-                                                    >
-                                                        <Text fontWeight="bold">{user.name}</Text>
-                                                    </ChakraLink>
+                                                    > */}
+                                                    <Text fontWeight="bold">{user.name}</Text>
+                                                    {/* </ChakraLink> */}
                                                     <Text fontWeight="small" color="gray.300">{user.email}</Text>
                                                 </Box>
                                             </Td>
@@ -121,12 +129,13 @@ export default function UserList() {
                                             <Td>
                                                 <IconButton
                                                     aria-label="Open navigation"
-                                                    icon={<Icon as={RiPencilLine} />}
+                                                    icon={<Icon as={RiZoomInLine} />}
                                                     fontSize="24"
                                                     colorScheme="gray.300"
                                                     variant="unstyled"
                                                     _hover={{ color: "purple" }}
-                                                    onClick={() => { }}
+                                                    onMouseEnter={() => handlePrefetchUser(user.id)}
+                                                    onClick={() => handleUserDetail(user.id)}
                                                     mr="2"
                                                 />
                                             </Td>
